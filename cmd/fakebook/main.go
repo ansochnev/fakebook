@@ -5,10 +5,12 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/gin-gonic/gin"
 	"github.com/go-sql-driver/mysql"
 
 	"fakebook/internal/backend"
 	"fakebook/internal/handlers"
+	"fakebook/internal/middleware"
 )
 
 func main() {
@@ -23,11 +25,19 @@ func main() {
 		log.Fatal("Failed to initialize backend:", err)
 	}
 
-	http.Handle("/", handlers.ShowProfile{
-		Backend: backend,
-	})
+	router := gin.New()
 
-	err = http.ListenAndServe(":8080", http.DefaultServeMux)
+	router.RedirectTrailingSlash = false
+	router.RemoveExtraSlash = true
+	router.HandleMethodNotAllowed = true
+
+	router.GET("/", handlers.NewWelcomePage())
+	router.GET("/:username", handlers.NewShowProfile(backend))
+
+	// Make no difference between "/foo" and "/foo/".
+	handler := middleware.RemoveTrailingSlashFromPath(router)
+
+	err = http.ListenAndServe(":8080", handler)
 	if err != nil {
 		log.Fatal(err)
 	}
