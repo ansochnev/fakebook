@@ -31,7 +31,11 @@ func main() {
 	router.RemoveExtraSlash = true
 	router.HandleMethodNotAllowed = true
 
-	router.GET("/", handlers.NewWelcomePage())
+	router.Use(gin.Logger())
+
+	router.StaticFile("/", "site/welcome.html")
+	router.Static("/css", "site/css")
+
 	router.GET("/:username", handlers.NewShowProfile(backend))
 
 	// Make no difference between "/foo" and "/foo/".
