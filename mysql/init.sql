@@ -35,5 +35,5 @@ CREATE TABLE profiles (
 );
 
 
-CREATE USER 'fakebook'@'localhost' IDENTIFIED BY 'password';
+CREATE USER 'fakebook'@'localhost' IDENTIFIED BY 'test=Oohuluo8';
 GRANT SELECT, INSERT, UPDATE, DELETE ON fakebook.* TO 'fakebook'@'localhost';

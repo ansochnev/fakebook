@@ -14,15 +14,25 @@ import (
 )
 
 func main() {
-	db, err := OpenDB()
+	config, err := ReadConfigFile("fakebook.yaml")
 	if err != nil {
-		log.Fatal("Failed to open DB:", err)
+		log.Fatalln("Failed to read config file:", err)
+	}
+
+	db, err := OpenDB(config)
+	if err != nil {
+		log.Fatalln("Failed to open DB:", err)
 	}
 	defer db.Close()
 
 	backend, err := backend.New(db)
 	if err != nil {
 		log.Fatal("Failed to initialize backend:", err)
+	}
+
+	gin.SetMode(gin.ReleaseMode)
+	if config.DebugMode {
+		gin.SetMode(gin.DebugMode)
 	}
 
 	router := gin.New()
@@ -33,28 +43,41 @@ func main() {
 
 	router.Use(gin.Logger())
 
-	router.StaticFile("/", "site/welcome.html")
 	router.Static("/css", "site/css")
+
+	welcomePage := handlers.WelcomePage{
+		BasicURL: config.BasicURL(),
+	}
+	router.GET("/", welcomePage.Handle)
 
 	router.GET("/:username", handlers.NewShowProfile(backend))
 
 	// Make no difference between "/foo" and "/foo/".
 	handler := middleware.RemoveTrailingSlashFromPath(router)
 
-	err = http.ListenAndServe(":8080", handler)
-	if err != nil {
-		log.Fatal(err)
+	if config.UseHTTPS {
+		err = http.ListenAndServeTLS(config.ListenAddress,
+			config.CertFile, config.KeyFile, handler)
+
+		if err != nil {
+			log.Fatal(err)
+		}
+	} else {
+		err = http.ListenAndServe(config.ListenAddress, handler)
+		if err != nil {
+			log.Fatal(err)
+		}
 	}
 }
 
-func OpenDB() (*sql.DB, error) {
-	config := mysql.Config{
-		DBName: "fakebook",
-		User:   "fakebook",
-		Passwd: "password",
+func OpenDB(config *Config) (*sql.DB, error) {
+	dbConfig := mysql.Config{
+		DBName: config.MySQL.Database,
+		User:   config.MySQL.User,
+		Passwd: config.MySQL.Password,
 	}
 
-	db, err := sql.Open("mysql", config.FormatDSN())
+	db, err := sql.Open("mysql", dbConfig.FormatDSN())
 	if err != nil {
 		return nil, err
 	}

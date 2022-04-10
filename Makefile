@@ -6,4 +6,4 @@ clean:
 	rm -f fakebook
 
 fakebook:
-	go build -o fakebook -tags netgo cmd/fakebook/main.go
+	go build -o fakebook -tags netgo cmd/fakebook/*

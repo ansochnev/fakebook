@@ -1,0 +1,13 @@
+listen_address: ":8080"
+certfile: ""
+keyfile: ""
+use_https: false
+
+hostname: "localhost"
+
+mysql:
+  database: "fakebook"
+  user:     "fakebook"
+  password: "test=Oohuluo8"
+
+debug_mode: true
