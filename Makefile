@@ -7,3 +7,6 @@ clean:
 
 fakebook:
 	go build -o fakebook -tags netgo cmd/fakebook/*
+
+tests:
+	go test ./...

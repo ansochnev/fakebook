@@ -3,9 +3,10 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="css/welcome.css">
   <title>Fakebook</title>
   <base href="${base_url}"></base>
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/welcome.css">
 </head>
 
 
@@ -20,17 +21,17 @@
 
   <div class="login">
     <form action="/login" method="post">
-      <label class="login-input-label" for="email">Email</label>
+      <label class="input-label" for="email">Email</label>
       <br>
-      <input class="login-input-field" id="email" type="email" name="email">
-      <br>
-      <br>
-      <label class="login-input-label" for="password">Password</label>
-      <br>
-      <input class="login-input-field" id="password" type="password" name="password">
+      <input class="input-field" id="email" type="email" name="email">
       <br>
       <br>
-      <input class="login-button" type="submit" value="Log In">
+      <label class="input-label" for="password">Password</label>
+      <br>
+      <input class="input-field" id="password" type="password" name="password">
+      <br>
+      <br>
+      <input class="green-button" type="submit" value="Log In">
     </form>
 
     <p style="text-align: center;">

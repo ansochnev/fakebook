@@ -43,14 +43,24 @@ func main() {
 
 	router.Use(gin.Logger())
 
-	router.Static("/css", "site/css")
-
 	welcomePage := handlers.WelcomePage{
 		BasicURL: config.BasicURL(),
 	}
-	router.GET("/", welcomePage.Handle)
 
+	registerPage := handlers.RegisterPage{
+		BasicURL: config.BasicURL(),
+	}
+
+	createAccount := handlers.CreateAccount{
+		Backend: backend,
+	}
+
+	router.Static("/css", "site/css")
+
+	router.GET("/", welcomePage.Handle)
+	router.GET("/register", registerPage.Handle)
 	router.GET("/:username", handlers.NewShowProfile(backend))
+	router.POST("/api/accounts", createAccount.Handle)
 
 	// Make no difference between "/foo" and "/foo/".
 	handler := middleware.RemoveTrailingSlashFromPath(router)

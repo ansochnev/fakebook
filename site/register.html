@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Fakebook</title>
+  <base href="${base_url}"></base>
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/welcome.css">
+</head>
+
+
+<body>
+  <div class="register-content">
+    <h1 class="welcome-title">Welcome to Fakebook</h1>
+    <p class="welcome-text">
+      Fakebook is my project for educational purposes.<br>
+      This is a trivial social network without any significant features.
+    </p>
+
+    <div class="register">
+      <h2 class="register-form-title">Create new account</h2>
+
+      <form action="/api/accounts" method="post">
+        <label class="input-label required" for="firstName">First name</label><br>
+        <input class="input-field" type="text" id="firstName" name="firstName"required>
+        <br><br>
+        <label class="input-label required" for="lastName">Last name</label><br>
+        <input class="input-field" type="text" id="lastName" name="lastName" required>
+        <br><br>
+        <label class="input-label" for="username">Username</label><br>
+        <input class="input-field" type="text" id="username" name="username">
+        <br><br>
+        <label class="input-label required" for="email">Email</label><br>
+        <input class="input-field" type="email" id="email" name="email" required>
+        <br><br>
+        <label class="input-label required" for="password">Password</label><br>
+        <input class="input-field" type="password" id="password" name="password" required>
+        <br><br>
+        <label class="input-label required" for="password2">Retype password</label><br>
+        <input class="input-field" type="password" id="password2" name="password2" required>
+        <br><br>
+        <input class="green-button" type="submit" value="Create">
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -23,7 +23,7 @@ func (b *Backend) GetProfileByUsername(username string) (*UserProfile, error) {
 		return nil, nil
 	}
 
-	query := formatSQLQuery(
+	query :=
 		`SELECT
 			first_name,
 			last_name,
@@ -33,7 +33,7 @@ func (b *Backend) GetProfileByUsername(username string) (*UserProfile, error) {
 			info
 		FROM profiles
 		JOIN accounts ON accounts.id = profiles.account_id
-		WHERE username = ?`)
+		WHERE username = ?`
 
 	row := b.db.QueryRow(query, username)
 
