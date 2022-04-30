@@ -51,6 +51,8 @@ func main() {
 		BasicURL: config.BasicURL(),
 	}
 
+	homePage := handlers.NewHomePage(backend, config.BasicURL())
+
 	createAccount := handlers.CreateAccount{
 		Backend: backend,
 	}
@@ -59,7 +61,7 @@ func main() {
 
 	router.GET("/", welcomePage.Handle)
 	router.GET("/register", registerPage.Handle)
-	router.GET("/:username", handlers.NewShowProfile(backend))
+	router.GET("/:username", homePage.Handle)
 	router.POST("/api/accounts", createAccount.Handle)
 
 	// Make no difference between "/foo" and "/foo/".

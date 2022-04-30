@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Fakebook</title>
+  <base href="${base_url}"></base>
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/home.css">
+</head>
+
+<body>
+  <div class="page-content">
+    <div class="profile">
+      <h2 class="profile-title">${name}</h2>
+      <div class="profile-row ${hide_date_of_birth}">
+        <h4 class="profile-key">Date of birth:</h4>
+        <div class="profile-value">${date_of_birth}</div>
+      </div>
+      <div class="profile-row ${hide_city}">
+        <h4 class="profile-key">City:</h4>
+        <div class="profile-value">${city}</div>
+      </div>
+      <div class="profile-about ${hide_about_me}">
+        <h3 class="profile-header">About me</h3>
+        ${about_me}
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+.page-content {
+    text-align: center;
+    margin: 0 auto;
+    width: 1000px;
+}
+
+.profile {
+    width: 500px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.profile-title {
+    margin: 20px 0;
+    font-size: 20px;
+}
+
+.profile-row {
+    text-align: left;
+    font-size: 14px;
+    height: 20px;
+    margin: 5px 0;
+}
+
+.profile-key {
+    display: inline-block;
+    margin: 0;
+    width: 25%;
+}
+
+.profile-value {
+    display: inline-block;
+}
+
+.profile-header {
+    margin: 0;
+    font-size: 16px;
+}
+
+.profile-about {
+    margin-top: 30px;
+}
